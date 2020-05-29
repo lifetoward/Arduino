@@ -1,0 +1,17 @@
+{
+    "configurations": [
+        {
+            "name": "Arduino-Linux",
+            "includePath": [
+                "/home/guy/Opera/Arduino/**",
+                "/usr/share/arduino/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/share/arduino/hardware/tools/avr/bin/avr-g++",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "clang-x64"
+        }
+    ],
+    "version": 4
+}

@@ -1,0 +1,4 @@
+# The following are build outputs which we don't need.
+*.elf
+*.hex
+libraries/**

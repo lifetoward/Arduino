@@ -13,10 +13,10 @@ void setup() {
 #define CycleTime 300
 
 void loop() {
-  dsp7.displayRaw(dsp7.minus);
   delay(CycleTime);
-  dsp7.displayHex(counter++, true);
+  dsp7.displayHex(counter++);
   counter &= 0xF;
   delay(CycleTime);
+  dsp7.displayRaw(dsp7.hyphen);
 }
 

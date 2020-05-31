@@ -1,0 +1,15 @@
+board_manager:
+  additional_urls: []
+daemon:
+  port: "50051"
+directories:
+  data: /home/guy/Library/Arduino
+  downloads: /home/guy/Downloads/Arduino
+  user: /home/guy/Opera/Arduino
+logging:
+  file: /home/guy/Library/Arduino/logging.log
+  format: text
+  level: info
+telemetry:
+  addr: :9090
+  enabled: false

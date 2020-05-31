@@ -1,4 +1,4 @@
-# The following are build outputs which we don't need.
+# The following are build outputs which get pushed to the device.
 *.elf
 *.hex
-libraries/**
+

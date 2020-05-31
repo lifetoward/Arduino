@@ -3,8 +3,6 @@
 ### Control a single 7 segment LED display (with decimal point) 
 ---
 
-This is not a particularly difficult thing to accomplish, but this project was more about learning some conventions for designing and building Arduino libraries than about the practical application. For example, we've explored and tried to achieve some exemplary models for everything from the git repository model to the conventions of assigning pins, to the structure of README files like this one. We've documented these findings and ideas in the [parent of this directory](../) in the repo. Even though it's simple in function, it is still a useful little library, for code reference if not for use with applications of the 7 segment display.
-
 We provide two modes by which to control the display and they are wired very differently.
 
 The first option, `Direct`, assigns a digital output pin to each of the LEDs in the display. `Direct` is better if you don't have a shift register IC, or just want to simplify the wiring of the project or take more direct control of the LEDs on the display.
@@ -90,5 +88,12 @@ This method only works with the `ViaShift` mode because it makes use of a capabi
 
 Output is briefly disabled and then re-enabled during initialization (assuming the pin is configured) using this same technique.
 
+## History and Context
+
+Controlling a 7-segment display is not a particularly difficult thing to accomplish, but this project was more about learning some conventions for designing and building Arduino libraries than about the practical application. If you're interested in this project's less obvious purposes, read on.
+
+We've explored and tried to achieve some exemplary models for everything from the git repository model to the conventions of assigning pins, to the structure of README files like this one. We've documented these findings and ideas in the [parent of this directory](../) in the repo. Even though it's simple in function, it is still a useful little library, for code reference if not for use with applications of the 7 segment display.
+
+We don't use the IDE, and prefer a well configured CLI instead. 
 ---
 

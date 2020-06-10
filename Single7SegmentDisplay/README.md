@@ -32,21 +32,22 @@ Here's the snippet from the header file which defines the pin configuration stru
 #define NO_PIN 0xFF
 
 struct PinsViaShift {
-  byte              // Connections to 74HC595
-    SerialOut,      // Pin 14 
-    Shift,          // Pin 11
-    Latch,          // Pin 12
-    ClearShift,     // Pin 10 (optional, use NO_PIN if not connected)
-    DisableOutput;  // Pin 13 (optional, use NO_PIN if not connected)
+  byte  
+    Data,     // to Pin 14 on the 74HC595 
+    Shift,    // to Pin 11 on the 74HC595
+    Latch,    // to Pin 12 on the 74HC595
+    Clear,    // to Pin 10 (optional, use NO_PIN if not connected)
+    Disable;  // to Pin 13 (optional, use NO_PIN if not connected)
 };
 
 struct PinsDirect {
   // Connections to the 7 seg display, i.e. via 220ohm resistors.
   byte A, B, C, D, E, F, G, P;
+  // Connecting P is optional; use NO_PIN if not connected
 };
 ```
 
-Here's an example of the construction of a controller object used in `ViaShift` mode:
+Here's an example of the configuration/declaration of a controller object used in `ViaShift` mode:
 
 `Single7SegmentDisplay dsp7((PinsViaShift){ 8, 9, 10, NO_PIN, NO_PIN });`
 
@@ -82,9 +83,9 @@ Here are a couple of example patterns to demonstrate how the bits map to the dis
 
 ### enableOutput( [ boolean(true) ] )
 
-You can simply enable or disable all elements of the display with this method. Pass `true` (or nothing) to enable the display, and pass `false` to disable it. Importantly, the value of the pattern remains stored in the output register even as the output is disabled. This makes it different than simply sending an 0 pattern to the device.
-
 This method only works with the `ViaShift` mode because it makes use of a capability on the shift register chip which stores the LED light status outputs on its 8 output pins. It also requires that you wire and configure the `DisableOutput` pin, as that's the only means we have to control this behavior on the shift register chip.
+
+You can simply enable or disable all elements of the display with this method. Pass `true` (or nothing) to enable the display, and pass `false` to disable it. Importantly, the value of the pattern remains stored in the output register even as the output is disabled. This makes it different than simply sending an 0 pattern to the device.
 
 Output is briefly disabled and then re-enabled during initialization (assuming the pin is configured) using this same technique.
 

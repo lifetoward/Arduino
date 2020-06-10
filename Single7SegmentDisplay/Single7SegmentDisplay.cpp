@@ -2,8 +2,10 @@
 #include "Single7SegmentDisplay.h"
 
 #define self Single7SegmentDisplay
-#define SetPin(which,how) digitalWrite(this->pins.which, how)
-#define InitPin(which,val) pinMode(this->pins.which, OUTPUT); SetPin(which, val)
+
+#define SetPin(which,how) if (this->pins.which != NO_PIN) digitalWrite(this->pins.which, how)
+#define InitPin(which,val) if (this->pins.which != NO_PIN) { \
+          pinMode(this->pins.which, OUTPUT); digitalWrite(this->pins.which, val); }
 #define PulseWidth 0 // can ensure that a Pulse is not so short as to be missed
 #define PulseUp(which) SetPin(which, HIGH); delay(PulseWidth); SetPin(which, LOW)
 
@@ -12,18 +14,17 @@ self::self( PinsViaShift pinAssign )
   this->mode = ViaShift;
   this->pins.s = pinAssign;
 
-  InitPin(s.SerialOut, LOW);
+  InitPin(s.Data, LOW);
   InitPin(s.Shift, LOW);
   InitPin(s.Latch, LOW);
-  if (pins.s.ClearShift != NO_PIN) {
-    InitPin(s.ClearShift, HIGH); // pull high to clear
-    SetPin(s.ClearShift, LOW);   // resume
-  }
-  if (pins.s.DisableOutput != NO_PIN) {
-    InitPin(s.DisableOutput, LOW);  // disable
-    SetPin(s.DisableOutput, HIGH);  // re-enable
-  }
-  this->displayRaw(this->on);
+
+  InitPin(s.Clear, HIGH); // pull high to clear
+  SetPin(s.Clear, LOW);   // resume
+
+  InitPin(s.Disable, LOW);  // disable
+  SetPin(s.Disable, HIGH);  // re-enable
+
+  this->displayRaw(self::on);
 }
 
 self::self( PinsDirect pinAssign )
@@ -45,7 +46,7 @@ void self::displayRaw( byte layout )
     
     // shift in the entire byte of content
     for (x = 0; x < 8; x++) {
-      SetPin(s.SerialOut, bitRead(layout, x) ? HIGH : LOW);
+      SetPin(s.Data, bitRead(layout, x) ? HIGH : LOW);
       PulseUp(s.Shift);
     }
 
@@ -69,9 +70,9 @@ byte self::displayHex( byte digit, bool decPt = false )
 
 void self::enableOutput( bool setting = true )
 {
-  if (this->mode != ViaShift || this->pins.s.DisableOutput == NO_PIN)
-    return;
-  SetPin(s.DisableOutput, setting ? LOW : HIGH);
+  if (this->mode == ViaShift) {
+    SetPin(s.Disable, setting ? LOW : HIGH);
+  }
 }
 
 const byte

@@ -13,3 +13,7 @@ Note that we do not yet conform with the specification of how to submit a librar
 ## Conventions
 
 We are liking the approach of using defined structures to configure pin connections used. Overloaded constructors neatly handle multiple approaches to the library's purpose. This model is super easy to consume for inexperienced programmers. Constructing the controller while passing in the configuration data is about as easy as it gets. 
+
+## Tools
+
+Don't forget to get [Fritzing](https://fritzing.org/download/), also available via Snap (Ubuntu Software) to open the `.fzz` files which lay out the wiring diagrams.
